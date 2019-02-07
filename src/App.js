@@ -1,12 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useEffect } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { useFirebase } from './hooks/useFirebase.js'
 
 const App = () => {
   const [state, setState] = useFirebase(`catch-of-the-day-92a28`, `scratch`)
-  const firstNameInput = useRef()
-  const firstName = state && state.firstName
+  let firstName
+
+  useEffect(() => {
+    firstName = state && state.firstName
+  }, [state])
 
   const handleChange = event => {
     const { name, value } = event.currentTarget
@@ -26,7 +29,6 @@ const App = () => {
         </p>
         <input
           name='firstName'
-          ref={firstNameInput}
           type='text'
           required
           placeholder='firstName'
