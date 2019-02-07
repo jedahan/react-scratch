@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useEvent } from './useEvent.js'
 import { useDebounce } from './useDebounce.js'
 
@@ -16,6 +16,7 @@ const useFirebase = (project, path = '/') => {
     if (event) {
       sendEvent(event)
     }
+    return () => { /* cancel previous fetches here? */ }
   }, [event])
 
   // Update the event on firebase side
